@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 /**
  * The test class HumanTest.
  *
- * @author  (your name)
- * @version (a version number or a date)
+ * @author  Emma Grey
+ * @version 11.12.2021
  */
 public class HumanTest
 {
-    private Human testHuman;
+    private Human human1;
 
     /**
      * Default constructor for test class HumanTest
@@ -30,7 +30,7 @@ public class HumanTest
     @BeforeEach
     public void setUp()
     {
-        testHuman = new Human();
+        human1 = new Human(15, 30);
     }
 
     /**
@@ -42,4 +42,43 @@ public class HumanTest
     public void tearDown()
     {
     }
+
+    @Test
+    public void testIsAlive()
+    {
+        assertEquals(true, human1.isAlive());
+        human1.takeDamage(29);
+        assertEquals(true, human1.isAlive());
+        human1.takeDamage(1);
+        assertEquals(false, human1.isAlive());
+        human1.takeDamage(5);
+        assertEquals(false, human1.isAlive());
+    }
+
+    @Test
+    public void testIsKnockedOut()
+    {
+        assertEquals(false, human1.isKnockedOut());
+        human1.takeDamage(29);
+        assertEquals(false, human1.isKnockedOut());
+        human1.takeDamage(1);
+        assertEquals(true, human1.isKnockedOut());
+        human1.takeDamage(5);
+        assertEquals(true, human1.isKnockedOut());
+    }
+
+    @Test
+    public void testTakeDamageGetHealth()
+    {
+        assertEquals(30, human1.getHealth());
+        human1.takeDamage(5);
+        assertEquals(25, human1.getHealth());
+        human1.takeDamage(25);
+        assertEquals(0, human1.getHealth());
+        human1.takeDamage(5);
+        assertEquals(-5, human1.getHealth());
+    }
 }
+
+
+

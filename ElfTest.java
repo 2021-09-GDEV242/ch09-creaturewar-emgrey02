@@ -8,12 +8,13 @@ import org.junit.jupiter.api.Test;
 /**
  * The test class ElfTest.
  *
- * @author  (your name)
- * @version (a version number or a date)
+ * @author  Emma Grey
+ * @version 11.12.2021
  */
 public class ElfTest
 {
-    private Elf testElf;
+    private Elf elf1;
+
 
     /**
      * Default constructor for test class ElfTest
@@ -30,7 +31,7 @@ public class ElfTest
     @BeforeEach
     public void setUp()
     {
-        testElf = new Elf();
+        elf1 = new Elf(15, 20);
     }
 
     /**
@@ -44,46 +45,44 @@ public class ElfTest
     }
 
     @Test
-    public void testGetHealth()
-    {
-        assertEquals(22, testElf.getHealth());
-        testElf.takeDamage(1);
-        assertEquals(21, testElf.getHealth());
-        testElf.takeDamage(21);
-        assertEquals(0, testElf.getHealth());
-        testElf.takeDamage(2);
-        assertEquals(-2, testElf.getHealth());
-    }
-
-    @Test
     public void testIsAlive()
     {
-        assertEquals(true, testElf.isAlive());
-        testElf.takeDamage(20);
-        assertEquals(false, testElf.isAlive());
-        testElf.takeDamage(2);
-        assertEquals(false, testElf.isAlive());
+        assertEquals(true, elf1.isAlive());
+        elf1.takeDamage(19);
+        assertEquals(true, elf1.isAlive());
+        elf1.takeDamage(1);
+        assertEquals(false, elf1.isAlive());
+        elf1.takeDamage(10);
+        assertEquals(false, elf1.isAlive());
     }
 
     @Test
     public void testIsKnockedOut()
     {
-        assertEquals(false, testElf.isKnockedOut());
-        testElf.takeDamage(22);
-        assertEquals(true, testElf.isKnockedOut());
-        testElf.takeDamage(2);
-        assertEquals(true, testElf.isKnockedOut());
+        assertEquals(false, elf1.isKnockedOut());
+        elf1.takeDamage(19);
+        assertEquals(false, elf1.isKnockedOut());
+        elf1.takeDamage(1);
+        assertEquals(true, elf1.isKnockedOut());
+        elf1.takeDamage(5);
+        assertEquals(true, elf1.isKnockedOut());
     }
 
     @Test
-    public void testTakeDamage()
+    public void testTakeDamageGetHealth()
     {
-        testElf.takeDamage(5);
-        assertEquals(15, testElf.getHealth());
-        testElf.takeDamage(16);
-        assertEquals(-1, testElf.getHealth());
+        assertEquals(20, elf1.getHealth());
+        elf1.takeDamage(5);
+        assertEquals(15, elf1.getHealth());
+        elf1.takeDamage(15);
+        assertEquals(0, elf1.getHealth());
+        elf1.takeDamage(5);
+        assertEquals(-5, elf1.getHealth());
     }
 }
+
+
+
 
 
 

@@ -1,9 +1,7 @@
-
-
 /**
  * The Human class implements a wrapper for the base Creature class with the following additions
- * Implements a maximum/minimum strength for the creature type [20/5]
- * Implements a maximum/minimum hitpoint total for the creature type [25/5]
+ * Implements a maximum/minimum strength for the creature type [30/10]
+ * Implements a maximum/minimum hitpoint total for the creature type [18/5]
  * 
  * @author Bill Crosbie
  * @version 2020-10 v1.0
@@ -37,6 +35,29 @@ public class Human extends Creature
         );
           
     }
+    
+    /**
+     * Constructor for objects of class human that take parameters. After the object
+     * is created, the values are tested for validity.
+     */
+    public Human(int str, int hp) {
+        super(str, hp);
+        testValues(str, hp);
+    }
+    
+    /**
+     * Tests the values passed into the constructor for Human objects. If invalid, 
+     * an error message prints out.
+     */
+    private void testValues(int str, int hp) throws RuntimeException {
+        if (str > MAX_HUMAN_STR || str < MIN_HUMAN_STR) {
+            throw new RuntimeException("invalid strength value");
+        }
+        if (hp > MAX_HUMAN_HP || hp < MIN_HUMAN_STR) {
+            throw new RuntimeException("invalid hp value");
+        }
+    }
+    
     
     
     // attack() - not overridden because Humans generate basic damage

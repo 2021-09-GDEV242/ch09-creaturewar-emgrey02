@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 /**
- * Write a description of class BattleSimulator here.
+ * This is the BattleSimulator class. It is the main class of the Creature War, since it populates
+ * two armies with various Creatures, and executes a battle sequence. For the class to do so, the
+ * public method beginBattle must be called. It will print the results of the battle to the terminal.
  *
  * @author Emma Grey
  * @version 11.11.2021
@@ -30,22 +32,25 @@ public class BattleSimulator
         //populate armyOne
         for (int i = 0; i < 100; i++) {
             int rand = Randomizer.nextInt(9) + 1;
-            if (rand <= 6) {
+            if (rand <= 5) {
                 armyOne.add(new Human());
-            } else {
+            } else if (rand <= 8){
                 armyOne.add(new Elf());
+            } else {
+                armyOne.add(new Aasimar());
             }
         }
-        
         //populate armyTwo
         for (int i = 0; i < 40; i++) {
             int rand = Randomizer.nextInt(24) + 1;
-            if (rand <= 18) {
+            if (rand <= 15) {
                 armyTwo.add(new Human());
+            } else if (rand <= 19) {
+                armyTwo.add(new Tiefling());
             } else if (rand <= 24) {
                 armyTwo.add(new Cyberdemon());
             } else {
-                armyTwo.add(new Barlog());
+                armyTwo.add(new Balrog());
             }
         }
     }
@@ -72,13 +77,18 @@ public class BattleSimulator
                 armyTwo.remove(0);
             }
         }
+        //return which army won
         if (armyOne.isEmpty()) {
-            return "army Two defeated army One!";
+            return "Army Two defeated Army One!";
         } else {
-            return "army One defeated army Two!";
+            return "Army One defeated Army Two!";
         }
     }
     
+    /**
+     * This method must be called to start the battle sequence. It populates the armies and executes
+     * the battle. The results are printed to the terminal.
+     */
     public void beginBattle() {
         populateArmies();
         System.out.println(battle());
